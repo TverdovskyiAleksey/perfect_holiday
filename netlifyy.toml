@@ -1,6 +1,5 @@
 [build]
-publish = 'build'
-command = "CI=false npm run build"
+publish = 'CI=false npm run build'
 
 [[redirects]]
 from = '/*'
