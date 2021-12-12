@@ -14,6 +14,7 @@ import { Role, url, checkIsBlock } from 'constants/constants';
 import { SetStateAction, useEffect, useState } from 'react';
 import { NotAccess } from 'Components/403';
 import { CollectionCreateForm } from '../AddUserModal/index';
+import { CollectionDeleteForm } from 'Components/Modal/deleteUser/index';
 import React from 'react';
 import './index.css';
 const { Column } = Table;
@@ -24,6 +25,7 @@ const Users = (): JSX.Element => {
   };
   const { error, isLoading, data, refetch } = useGetListOfUsers();
   const [visible, setVisible] = useState<boolean>(false);
+  const [visibleDelete, setVisibleDelete] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = React.useState('');
   const [searchResults, setSearchResults] = React.useState<User[]>([]);
   const state = store.getState();
@@ -43,18 +45,7 @@ const Users = (): JSX.Element => {
         return refetch(), message.success(lang.updateStatus.success);
       });
   };
-
-  const deleteUser = (dataIndex: string, key: IUserId) => {
-    toDeleteUser({
-      id: key.id,
-      userId: dataIndex,
-    })
-      .then(() => message.loading(lang.info.loading))
-      .catch(() => message.error(lang.superAdmin.failDelete))
-      .finally(() => {
-        return refetch(), message.success(lang.superAdmin.successDelete);
-      });
-  };
+  
   const handleChange = (event: { target: { value: SetStateAction<string> } }) =>
     setSearchTerm(event.target.value);
   useEffect(() => {
@@ -134,18 +125,26 @@ const Users = (): JSX.Element => {
                     {dataIndex ? lang.updateStatus.block : lang.updateStatus.unblock}
                   </Button>
                 )}
-                {InitialState.canDeleteUser && (
-                  <Button
-                    onClick={() => {
-                      deleteUser(dataIndex, key);
-                    }}
-                    htmlType="submit"
-                    type="link"
-                  >
-                    {lang.superAdmin.deleteButton}
-                  </Button>
+                {InitialState.canDeleteUser && (<>
+                      <Button
+                        onClick={() => {
+                          setVisibleDelete(true);
+                        }}
+                        htmlType="submit"
+                        type="link"
+                    >
+                      {lang.superAdmin.deleteButton}
+                    </Button>
+                      <CollectionDeleteForm
+                          values={{dataIndex: dataIndex,key:key}}
+                          visible={visibleDelete}
+                          onCreate={() => setVisibleDelete(false)}
+                          onCancel={() => setVisibleDelete(false)}
+                      />
+                </>
                 )}
               </Space>
+
             )}
           />
         </Table>

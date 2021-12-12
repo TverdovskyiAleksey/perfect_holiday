@@ -4,6 +4,9 @@ export interface IUser {
   id: string;
   access_token: string;
   role: TRole;
+  name: string;
+  sickDays: number;
+  vacationDays: number;
 }
 
 export interface IPermission {

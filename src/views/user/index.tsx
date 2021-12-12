@@ -51,7 +51,12 @@ const UserView = (): JSX.Element => {
   const newEndDate = new Date(watchAll.endDate);
 
   const state = store.getState();
+
   const userId = state.person.user.id;
+  const name = state.person.user.name;
+  const sick = state.person.user.sickDays;
+  const vacation = state.person.user.vacationDays;
+
   const { data, refetch, isRefetching, isFetched } = getUserRequestDays(userId);
 
   const start_date = showCurrentDate(newStartDate);
@@ -94,7 +99,7 @@ const UserView = (): JSX.Element => {
     );
   }
 
-  if (sickDays === undefined) {
+  if (sickDays === undefined || sickDays.length <= 1) {
     lastSickDay = today;
   } else {
     lastSickDay = new Date(
@@ -105,7 +110,7 @@ const UserView = (): JSX.Element => {
     );
     lastSickDay.setDate(lastSickDay.getDate() + howManyPassSickDays);
   }
-  if (vacationDays === undefined) {
+  if (vacationDays === undefined || vacationDays.length <= 1) {
     lastVacationDay = today;
   } else {
     lastVacationDay = new Date(
@@ -195,24 +200,21 @@ const UserView = (): JSX.Element => {
         )}
         <Sidebar />
         <StyledContent>
-          {data?.map(({ first_name, available_sick_days, available_vacation }) => (
-            <StyledDivContent className="site-layout-background">
-              <Row>
-                <StyledDivNameInfo>
-                  <strong>Welcome, {first_name}</strong>
-                </StyledDivNameInfo>
-              </Row>
-              <Row>
-                <StyledDivVacationInfo>
-                  <strong>{available_sick_days} sick leave</strong>
-                </StyledDivVacationInfo>
-                <StyledDivVacationInfo>
-                  <strong>{available_vacation} vacation days</strong>
-                </StyledDivVacationInfo>
-              </Row>
-            </StyledDivContent>
-          ))}
-
+          <StyledDivContent className="site-layout-background">
+            <Row>
+              <StyledDivNameInfo>
+                <strong>Welcome, {name}</strong>
+              </StyledDivNameInfo>
+            </Row>
+            <Row>
+              <StyledDivVacationInfo>
+                <strong>{sick} sick leave</strong>
+              </StyledDivVacationInfo>
+              <StyledDivVacationInfo>
+                <strong>{vacation} vacation days</strong>
+              </StyledDivVacationInfo>
+            </Row>
+          </StyledDivContent>
           <StyledButton
             type="primary"
             shape="round"
@@ -222,14 +224,12 @@ const UserView = (): JSX.Element => {
           >
             +
           </StyledButton>
-          {data?.map(({ vacations }: any) => (
-            <Table
-              columns={columns}
-              dataSource={vacations}
-              size="large"
-              rowClassName={SelectColor}
-            />
-          ))}
+          <Table
+            columns={columns}
+            dataSource={data}
+            size="large"
+            rowClassName={SelectColor}
+          />
         </StyledContent>
       </StyledLayout>
     </Layout>

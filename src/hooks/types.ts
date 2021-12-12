@@ -15,12 +15,14 @@ export type User = {
   available_vacation: number;
   available_sick_days: number;
   vacations?: Array<THoliday>;
+  status: string;
 };
 
 export type TBookkHoliday = {
   start_date: string;
   end_date: string;
   type: string;
+  status?: string;
 };
 export type THoliday = {
   start_date: string;

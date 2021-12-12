@@ -67,13 +67,20 @@ export const lang = {
     succeess: 'The employee was successfuly created',
     fail: 'Something goes wrong. Try again later.',
   },
+  deleteUser: {
+
+    title: 'Deleting User',
+    okText: 'Delete',
+    cancelText: 'Cancel',
+    description: 'Are you want to delete this user?'
+  },
   superAdmin: {
     userFirstName: 'First Name',
     userLastName: 'Last Name',
     actionsTitle: 'Actions',
     editButton: 'Edit',
     deleteButton: 'Delete',
-    successDelete: 'User successfully delete!',
+    successDelete: 'User successfully deleted!',
     failDelete: 'Error deleting user!',
     roleTitle: 'Role',
     searchInputText: 'Search user',
