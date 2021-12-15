@@ -100,10 +100,17 @@ export function getUserRequestDays(userId: string) {
     const { data } = await axios.get(`${REACT_APP_BASE}${url.casual}${userId}`, {
       headers: { Authorization: token },
     });
-
     return data;
   });
 }
+
+export const toEditRestDays = async (values: any) => {
+  const state = store.getState();
+  const token = `Bearer ${state.person.user.access_token}`;
+  return axios.put(`${REACT_APP_BASE}${url.casual}editing`, values, {
+    headers: { Authorization: token },
+  });
+};
 
 export const toDeleteUser = async (values: TDeleteUser) => {
   const state = store.getState();

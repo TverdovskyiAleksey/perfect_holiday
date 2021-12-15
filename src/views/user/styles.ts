@@ -1,8 +1,28 @@
 import styled from 'styled-components';
+import DatePicker from 'react-datepicker';
 
 import { Layout, Button, Form, Select } from 'antd';
 
 const { Content } = Layout;
+
+export const StyledDatePicker = styled(DatePicker)`
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  text-align: center;
+  padding: 4px 15px;
+
+  :hover {
+    border: 1px solid #40a9ff;
+  }
+
+  :focus {
+    border-color: #40a9ff;
+    outline: 0; 
+    -webkit-box-shadow: 0px 0px 2px 1px rgba(105, 192, 255, 0.93);
+    -moz-box-shadow: 0px 0px 2px 1px rgba(105, 192, 255, 0.93);
+    box-shadow: 0px 0px 2px 1px rgba(105, 192, 255, 0.93);
+  }
+`;
 
 export const StyledLayout = styled(Layout)`
   display: flex;

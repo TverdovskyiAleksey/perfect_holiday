@@ -1,4 +1,4 @@
-import { APPROVED, DECLINED } from './statuses';
+import { APPROVED, DECLINED, CHANGED } from './statuses';
 
 export enum Role {
   EMPLOYEE = 'employee',
@@ -13,6 +13,7 @@ export const url = {
   auth: 'auth/',
   casual: 'casual/',
   mail: 'mail/',
+  editing: 'editing/',
   pushPassword: 'push-password/',
   pending: 'casual/pending',
   forsuper: 'admin-employee',
@@ -24,6 +25,8 @@ export const sellectItemColor = (status: string) => {
     return 'red';
   } else if (status === APPROVED) {
     return 'green';
+  } else if (status === CHANGED) {
+    return 'blue';
   }
   return 'yellow';
 };

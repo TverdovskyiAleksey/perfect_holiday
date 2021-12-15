@@ -55,6 +55,8 @@ export const lang = {
     failMessageStatusApproved: 'Fail to approved!',
     messageStatusDeclined: 'Declined successful!',
     failMessageStatusDeclined: 'Fail to declined!',
+    messageStatusEditing: 'Edited successfully!',
+    failMessageStatusEditing: 'Fail to edited!',
   },
   addUser: {
     'firstName-validation': "Please enter employee's first name !",
@@ -68,7 +70,6 @@ export const lang = {
     fail: 'Something goes wrong. Try again later.',
   },
   deleteUser: {
-
     title: 'Deleting User',
     okText: 'Delete',
     cancelText: 'Cancel',
@@ -91,4 +92,11 @@ export const lang = {
   info: {
     loading: 'Please wait...',
   },
+  modalCalendar: {
+    topText: 'Please choose dates of reservation.',
+    cancelButton: 'Cancel',
+    confirmButton: 'Confirm Reservation',
+    selectVacation: 'Vacation',
+    selectSickLeave: 'Sick leave',
+  }
 };
