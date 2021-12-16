@@ -111,7 +111,8 @@ const UserView = (): JSX.Element => {
     );
     lastSickDay.setDate(lastSickDay.getDate() + howManyPassSickDays);
   }
-  if (vacationDays === undefined || vacationDays.length <= 1) {
+  if (!vacationDays || vacationDays.length <= 1) {
+
     lastVacationDay = today;
   } else {
     lastVacationDay = new Date(
@@ -185,6 +186,7 @@ const UserView = (): JSX.Element => {
                 >
                   <Option value="vacation">{lang.modalCalendar.selectVacation}</Option>
                   <Option value="sick">{lang.modalCalendar.selectSickLeave}</Option>
+                  <Option value="unpaid">Unpaid</Option>
                 </SelectBlock>
               </StyledInputContent>
 
@@ -227,7 +229,7 @@ const UserView = (): JSX.Element => {
           </StyledButton>
           <Table
             columns={columns}
-            dataSource={data}
+            dataSource={userVacations}
             size="large"
             rowClassName={SelectColor}
           />

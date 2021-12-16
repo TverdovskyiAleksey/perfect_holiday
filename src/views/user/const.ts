@@ -28,3 +28,5 @@ export function showCurrentDate(value: Date) {
 }
 export const howManyPassSickDays = 30;
 export const howManyPassVacationDays = 60;
+
+
